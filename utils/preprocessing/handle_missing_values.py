@@ -1,8 +1,9 @@
+from .. import draw_line
+
+
 # fill missing values for each type of columns
 def handle_missing_values(dataset, binary_columns, continuous_columns, multi_categorical_columns, categorical_columns):
-  print("\n" + "=" * 30)
-  print("Handling Missing Values")
-  print("=" * 30)
+  draw_line("Handling Missing Values")
 
   dataset_clean = dataset.copy()
   missing_before = dataset.isnull().sum().sum()

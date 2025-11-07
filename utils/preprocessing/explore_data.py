@@ -1,13 +1,12 @@
 from .identify_column_types import identify_column_types
+from .. import draw_line
 
 
 def explore_data(dataset):
-  print("=" * 30)
-  print("Exploring Data")
-  print("=" * 30)
+  draw_line("Exploring Data")
 
   # Basic info
-  print("\nDataset Info:")
+  print("Dataset Info:")
   print(f"Shape: {dataset.shape}")
 
   print("\nFirst 5 rows:")
@@ -49,4 +48,4 @@ def explore_data(dataset):
           normalize=True) * 100).sort_index()
       print(f"{col}: {dict(value_counts)} - {dict(percentages.round(2))}%")
 
-  return numerical_columns, categorical_columns, binary_columns, continuous_columns, multi_categorical_columns
+  return categorical_columns, binary_columns, continuous_columns, multi_categorical_columns

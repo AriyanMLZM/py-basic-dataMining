@@ -1,10 +1,9 @@
 import pandas as PD
+from .. import draw_line
 
 
 def detect_missing_values(dataset):
-  print("\n" + "=" * 30)
-  print("Detecting Missing Values")
-  print("=" * 30)
+  draw_line("Detecting Missing Values")
 
   missing_values = dataset.isnull().sum()
   missing_percentage = (missing_values / len(dataset)) * 100

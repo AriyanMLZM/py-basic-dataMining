@@ -1,10 +1,9 @@
 import numpy as NP
+from .. import draw_line
 
 
-def handle_outliers(dataset, continuous_columns, method='remove'):
-  print("\n" + "=" * 30)
-  print(f"Handling Outliers - Method: {method}")
-  print("=" * 30)
+def handle_outliers(dataset, continuous_columns, method='cap'):
+  draw_line(f"Handling Outliers - Method: {method.upper()}")
 
   if not continuous_columns:
     print("No continuous columns for outlier handling.")
