@@ -1,5 +1,4 @@
-from utils.load_csv import load_csv
-from utils.explore_data import explore_data
+from utils import load_csv, explore_data
 
 datasetPath = './dataset/dataset.csv'
 
