@@ -1,11 +1,9 @@
 import numpy as NP
+from .. import draw_line
 
 
 def knn_handle_missing_values(dataset, binary_columns, continuous_columns, multi_categorical_columns, categorical_columns, k=5):
-  """Use KNN to impute missing values based on similar records"""
-  print("\n" + "=" * 50)
-  print("KNN IMPUTATION FOR MISSING VALUES")
-  print("=" * 50)
+  draw_line('Handling Missing Values - KNN')
 
   dataset_imputed = dataset.copy()
   missing_before = dataset.isnull().sum().sum()
