@@ -2,7 +2,7 @@ from .. import draw_line
 
 
 def report_processed_quality(dataset, binary_columns, continuous_columns, multi_categorical_columns, categorical_columns):
-  draw_line("Reporting Processed Quality")
+  draw_line("Reporting Preprocessed Quality")
 
   print(f"Dataset Shape: {dataset.shape}")
   print(f"Binary columns: {len(binary_columns)}")

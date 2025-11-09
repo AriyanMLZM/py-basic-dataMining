@@ -1,0 +1,6 @@
+from .plot_binary_distributions import plot_binary_distributions
+from .plot_multi_categorical_distributions import plot_multi_categorical_distributions
+from .plot_qqplots import plot_qqplots
+from .plot_histograms import plot_histograms
+from .plot_boxplots import plot_boxplots
+from .plot_correlation_matrix import plot_correlation_matrix

@@ -1,5 +1,4 @@
-from .identify_column_types import identify_column_types
-from .. import draw_line
+from .. import draw_line, identify_column_types
 
 
 def explore_data(dataset):
