@@ -28,7 +28,7 @@ def evaluate_model(y_true, y_pred):
   print(f"Recall: {recall:.4f}")
   print(f"F1-Score: {f1:.4f}")
   print(f"\nConfusion Matrix:")
-  print(f"[[TN: {tn:.0f}  FP: {fp:.0f}]")
-  print(f" [FN: {fn:.0f}  TP: {tp:.0f}]]")
+  print(f"[TN: {tn:.0f}, FP: {fp:.0f}]")
+  print(f"[FN: {fn:.0f}, TP: {tp:.0f}]")
 
   return accuracy, precision, recall, f1

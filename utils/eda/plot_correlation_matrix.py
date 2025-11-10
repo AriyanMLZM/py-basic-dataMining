@@ -1,28 +1,35 @@
 import matplotlib.pyplot as PLT
+from .. import draw_line
 
 
-def plot_correlation_matrix(dataset, numerical_columns, save_path):
-  corr_matrix = dataset[numerical_columns].corr()
+def plot_correlation_matrix(dataset, corr_columns, target_column, save_path):
+  draw_line("Correlation Matrix")
 
-  PLT.figure(figsize=(12, 10))
+  # Add target at end
+  corr_columns.remove(target_column)
+  corr_columns.append(target_column)
+
+  corr_matrix = dataset[corr_columns].corr()
+
+  PLT.figure(figsize=(14, 12))
   im = PLT.imshow(corr_matrix, cmap='coolwarm',
                   aspect='auto', vmin=-1, vmax=1)
 
   cbar = PLT.colorbar(im, fraction=0.046, pad=0.04)
   cbar.set_label('Correlation Coefficient', rotation=270, labelpad=20)
 
-  PLT.xticks(range(len(numerical_columns)),
-             numerical_columns, rotation=45, ha='right')
-  PLT.yticks(range(len(numerical_columns)), numerical_columns)
+  PLT.xticks(range(len(corr_columns)), corr_columns,
+             rotation=45, ha='right', fontsize=8)
+  PLT.yticks(range(len(corr_columns)), corr_columns, fontsize=8)
 
-  # Add correlation values as text
-  for i in range(len(numerical_columns)):
-    for j in range(len(numerical_columns)):
-      PLT.text(j, i, f'{corr_matrix.iloc[i, j]:.2f}',
-               ha='center', va='center', fontsize=10,
-               bbox=dict(boxstyle="round,pad=0.3", facecolor='white', alpha=0.8))
+  # Add correlation values as text (only for notable correlations)
+  for i in range(len(corr_columns)):
+    for j in range(len(corr_columns)):
+      corr_val = corr_matrix.iloc[i, j]
+      PLT.text(j, i, f'{corr_val:.2f}', ha='center', va='center', fontsize=7, bbox=dict(
+          boxstyle="round,pad=0.2", facecolor='white', alpha=0.8))
 
-  PLT.title('Correlation Matrix of Numerical Features',
+  PLT.title('Correlation Matrix After One-Hot Encoding',
             fontsize=14, fontweight='bold')
   PLT.tight_layout()
   PLT.savefig(save_path + 'correlation_matrix.png',
@@ -30,15 +37,19 @@ def plot_correlation_matrix(dataset, numerical_columns, save_path):
   PLT.close()
   print("Correlation matrix saved as 'correlation_matrix.png'")
 
-  # Print strong correlations
-  print("\nStrong Correlations (|r| > 0.5):")
-  strong_corrs = []
-  for i in range(len(numerical_columns)):
-    for j in range(i+1, len(numerical_columns)):
-      corr = corr_matrix.iloc[i, j]
-      if abs(corr) > 0.5:
-        strong_corrs.append(
-            (numerical_columns[i], numerical_columns[j], corr))
+  # Print correlations with target
+  print("\nFeature Correlations with Target:")
+  target_corrs = []
+  for col in corr_columns:
+    if col != target_column:
+      corr = corr_matrix.loc[col, target_column]
+      target_corrs.append((col, corr))
 
-  for feat1, feat2, corr in strong_corrs:
-    print(f"  {feat1} - {feat2}: {corr:.3f}")
+  # Sort by absolute correlation strength
+  target_corrs.sort(key=lambda x: abs(x[1]), reverse=True)
+
+  for col, corr in target_corrs:
+    strength = "STRONG" if abs(
+        corr) > 0.5 else "MODERATE" if abs(corr) > 0.3 else "WEAK"
+    direction = "positive" if corr > 0 else "negative"
+    print(f"  {col}: {corr:.3f} ({strength} {direction})")

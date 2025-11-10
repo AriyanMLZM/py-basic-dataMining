@@ -39,4 +39,4 @@ def identify_column_types(dataset):
     if len(unique_values) > 2:
       multi_categorical_columns.append(col)
 
-  return numerical_columns, categorical_columns, binary_columns, continuous_columns, multi_categorical_columns
+  return categorical_columns, binary_columns, continuous_columns, multi_categorical_columns

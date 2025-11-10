@@ -19,9 +19,6 @@ def knn_handle_missing_values(dataset, binary_columns, continuous_columns, multi
   if binary_columns:
     distance_columns.extend(binary_columns)
 
-  print(
-      f"Using {len(distance_columns)} features for KNN distance calculation: {distance_columns}")
-
   # First, temporarily fill missing values in distance columns with mean for initial calculation
   temp_dataset = dataset[distance_columns].copy()
   for col in distance_columns:

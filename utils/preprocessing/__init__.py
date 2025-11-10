@@ -4,5 +4,5 @@ from .handle_missing_values import handle_missing_values
 from .detect_outliers import detect_outliers
 from .handle_outliers import handle_outliers
 from .normalize_data import normalize_data
-from .report_processed_quality import report_processed_quality
 from .knn_handle_missing_values import knn_handle_missing_values
+from .one_hot_encode_categoricals import one_hot_encode_categoricals

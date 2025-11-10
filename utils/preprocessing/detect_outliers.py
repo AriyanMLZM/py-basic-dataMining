@@ -3,7 +3,7 @@ from .. import draw_line
 
 # Detect outliers IQR
 def detect_outliers(dataset, continuous_columns):
-  draw_line("Detecting Outliers")
+  draw_line("Detecting Outliers - IQR")
 
   if not continuous_columns:
     print("No continuous columns for outlier detection.")
